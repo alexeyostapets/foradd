@@ -22,8 +22,8 @@ echo $buffer.'---';
                     $token = str_replace('access_token=', '', $buffer);
                     $expires='';
                     if(strpos($token, '&expires=') > 0){
-                        $token=substr($token,0,strpos($token, '&expires='));
                         $expires=substr($token,strpos($token,'&expires=')+8,50);
+                        $token=substr($token,0,strpos($token, '&expires='));
                     }
 echo"--<br />".$token."<br />--".$expires.'<br />--';
                     //this is just to demo how to use the token and 
