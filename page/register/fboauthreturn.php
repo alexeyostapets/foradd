@@ -21,8 +21,9 @@ echo $buffer.'---';
                     //for use later   
                     $token = str_replace('access_token=', '', $buffer);
                     if(strpos($token, '&expires=') > 0){
-                        echo "!!!".strpos($token, '&expires=');
-                    }else echo"33333333333";
+                        $token=substr($token,0,strpos($token, '&expires='));
+                    }
+                    echo"--<br />".$token."<br />--";
                     //this is just to demo how to use the token and 
                     //retrieves the users facebook_id
                     $url = 'https://graph.facebook.com/me/?access_token='.$token;
