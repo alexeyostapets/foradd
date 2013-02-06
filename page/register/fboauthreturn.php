@@ -20,10 +20,12 @@ echo $buffer.'---';
                     //if you requested offline acces save this token to db 
                     //for use later   
                     $token = str_replace('access_token=', '', $buffer);
+                    $expires='';
                     if(strpos($token, '&expires=') > 0){
                         $token=substr($token,0,strpos($token, '&expires='));
+                        $expires=substr($token,strpos($token,'&expires=')+8,50);
                     }
-                    echo"--<br />".$token."<br />--";
+echo"--<br />".$token."<br />--".$expires.'<br />--';
                     //this is just to demo how to use the token and 
                     //retrieves the users facebook_id
                     $url = 'https://graph.facebook.com/me/?access_token='.$token;
