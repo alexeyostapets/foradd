@@ -28,7 +28,7 @@ echo $buffer.'---';
 echo"--<br />".$token."<br />--".$expires.'<br />--';
                     //this is just to demo how to use the token and 
                     //retrieves the users facebook_id
-                    $url = 'https://graph.facebook.com/me/?access_token='.$token.'FF';
+                    $url = 'https://graph.facebook.com/me/?access_token='.$token;
         echo "==".$url;
                     $curl_handle=curl_init();
                     curl_setopt($curl_handle,CURLOPT_URL,$url);
