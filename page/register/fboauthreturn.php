@@ -10,7 +10,7 @@ class page_register_fboauthreturn extends Page {
             if(isset($_GET["code"])){
                 $code = $_GET["code"];    
         echo "==".$code;
-                $url = 'https://graph.facebook.com/oauth/access_token?client_id='.$this->api->getConfig('auth/facebook/app_id',0).'&redirect_uri='.urlencode('http://yoursite.com/fb_oauth_return.php').'&client_secret='.$this->api->getConfig('auth/facebook/app_secret',0).'&code='.$code;
+                $url = 'https://graph.facebook.com/oauth/access_token?client_id='.$this->api->getConfig('auth/facebook/app_id',0).'&redirect_uri='.urlencode('http://'.$_SERVER['HTTP_HOST'].'/register/fboauthreturn').'&client_secret='.$this->api->getConfig('auth/facebook/app_secret',0).'&code='.$code;
                 
         echo "==".$url;
                 $curl_handle=curl_init();
