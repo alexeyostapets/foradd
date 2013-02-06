@@ -18,7 +18,8 @@ class page_register_fboauthreturn extends Page {
                 curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,6);
                 curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
                 $buffer = curl_exec($curl_handle);
-                curl_close($curl_handle);    
+                curl_close($curl_handle);
+echo $buffer.'---';
                 if(strpos($buffer, 'access_token=') === 0){
                     //if you requested offline acces save this token to db 
                     //for use later   
