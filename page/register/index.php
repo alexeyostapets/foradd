@@ -10,6 +10,9 @@ class page_register_index extends Page {
         	$form=$this->add('Form_Register');
         }
         
+        $this->template->set('site',$_SERVER['HTTP_HOST']);
+        $this->template->set('client_id',$this->api->getConfig('auth/facebook/app_id',0));
+        
     }
     function defaultTemplate(){
     	return array('page/register/index');
