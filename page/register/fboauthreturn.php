@@ -37,22 +37,28 @@ echo"--<br />".$token."<br />--".$expires.'<br />--';
                     $buffer = curl_exec($curl_handle);
                     curl_close($curl_handle);
                     $jobj = json_decode($buffer);
-                    $facebook_email = $jobj->email;
-                    
-                    $user=$this->add('Model_User')->tryLoadBy('email',$facebook_email);
-                    $user->get('id');
-                    if($user->loaded()){
-                        $social=$this->add('Model_Social')->tryLoadBy('user_id',$user->get('id'));
-                        $social->set('token',$token);
-                        $social->save();
+                    if(!$jobj->error){
+                        $facebook_email = $jobj->email;
+                        
+                        $user=$this->add('Model_User')->tryLoadBy('email',$facebook_email);
+                        $user->get('id');
+                        if($user->loaded()){
+                            $social=$this->add('Model_Social')->tryLoadBy('user_id',$user->get('id'));
+                            $social->set('token',$token);
+                            $social->save();
+                        }else{
+                            $user->set('email',$facebook_email);
+                            $user->save();
+                            $social=$this->add('Model_Social');
+                            $social->set('user_id',$user->get('id'));
+                            $social->set('oauth_type','facebook');
+                            $social->set('token',$token);
+                            $social->save();
+                        }
+                        $auth->login($facebook_email);
+                        $form->js()->univ()->redirect('index')->execute();
                     }else{
-                        $user->set('email',$facebook_email);
-                        $user->save();
-                        $social=$this->add('Model_Social');
-                        $social->set('user_id',$user->get('id'));
-                        $social->set('oauth_type','facebook');
-                        $social->set('token',$token);
-                        $social->save();
+                        // do error
                     }
 
         echo "==";print_r($jobj);
