@@ -55,8 +55,8 @@ echo"--<br />".$token."<br />--".$expires.'<br />--';
                             $social->set('token',$token);
                             $social->save();
                         }
-                        $auth->login($facebook_email);
-                        $form->js()->univ()->redirect('index')->execute();
+                        $this->api->auth->login($facebook_email);
+                        $this->js()->univ()->redirect('index')->execute();
                     }else{
                         // do error
                     }
