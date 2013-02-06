@@ -2,7 +2,7 @@
 class page_register_fboauthreturn extends Page {
     function init(){
         parent::init();
-        
+
         if(!isset($_GET["error"])){
             
             if(isset($_GET["code"])){
@@ -37,7 +37,24 @@ echo"--<br />".$token."<br />--".$expires.'<br />--';
                     $buffer = curl_exec($curl_handle);
                     curl_close($curl_handle);
                     $jobj = json_decode($buffer);
-                    $facebook_id = $jobj->id;
+                    $facebook_email = $jobj->email;
+                    
+                    $user=$this->add('Model_User')->tryLoadBy('email',$facebook_email);
+                    $user->get('id');
+                    if($user->loaded()){
+                        $social=$this->add('Model_Social')->tryLoadBy('user_id',$user->get('id'));
+                        $social->set('token',$token);
+                        $social->save();
+                    }else{
+                        $user->set('email',$facebook_email);
+                        $user->save();
+                        $social=$this->add('Model_Social');
+                        $social->set('user_id',$user->get('id'));
+                        $social->set('oauth_type','facebook');
+                        $social->set('token',$token);
+                        $social->save();
+                    }
+
         echo "==";print_r($jobj);
                     
                 }else{

@@ -8,6 +8,8 @@ class Model_User extends Model_Table {
         $this->addField('email')->mandatory('Cannot be empty');
         $this->addField('password')->display(array('form'=>'password'));
 
+        $this->hasMany('Social');
+        
         $this->api->auth->addEncryptionHook($this);
         
         $this->addField('created_at');
