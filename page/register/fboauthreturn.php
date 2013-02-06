@@ -1,5 +1,5 @@
 <?
-class page_register_index extends Page {
+class page_register_fboauthreturn extends Page {
     function init(){
         parent::init();
         
