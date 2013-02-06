@@ -22,13 +22,13 @@ echo $buffer.'---';
                     $token = str_replace('access_token=', '', $buffer);
                     $expires='';
                     if(strpos($token, '&expires=') > 0){
-                        $expires=substr($token,strpos($token,'&expires=')+8,50);
+                        $expires=substr($token,strpos($token,'&expires=')+9,50);
                         $token=substr($token,0,strpos($token, '&expires='));
                     }
 echo"--<br />".$token."<br />--".$expires.'<br />--';
                     //this is just to demo how to use the token and 
                     //retrieves the users facebook_id
-                    $url = 'https://graph.facebook.com/me/?access_token='.$token;
+                    $url = 'https://graph.facebook.com/me/?access_token='.$token.'FF';
         echo "==".$url;
                     $curl_handle=curl_init();
                     curl_setopt($curl_handle,CURLOPT_URL,$url);
