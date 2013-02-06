@@ -1,0 +1,8 @@
+*.bak
+/atk4
+/.settings
+.buildpath
+.project
+config.php
+
+upload
