@@ -20,8 +20,8 @@ echo $buffer.'---';
                     //if you requested offline acces save this token to db 
                     //for use later   
                     $token = str_replace('access_token=', '', $buffer);
-                    if(strpos($token, '&expires=') === 0){
-                        echo "!!!";
+                    if(strpos($token, '&expires=') > 0){
+                        echo "!!!".strpos($token, '&expires=');
                     }else echo"33333333333";
                     //this is just to demo how to use the token and 
                     //retrieves the users facebook_id
